@@ -10,6 +10,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')  # Ensure `index.html` exists in the `templates/` folder
 
+@app.route('/index.html')
+def home():
+    return render_template('index.html')  # Ensure `index.html` exists in the `templates/` folder
+
 
 @app.route('/dashboard')
 def dashboard():
