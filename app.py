@@ -1,4 +1,7 @@
 from flask import Flask, render_template
+from forms import RegistrationForm, LoginForm
+from models import db, bcrypt, user, init_db
+from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 
 app = Flask(__name__)
 
