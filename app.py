@@ -9,9 +9,25 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import os
 from sqlalchemy import create_engine, text
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
 
 
 app = Flask(__name__)
+
+try:
+    faq_data = pd.read_csv("conversational_dataset.csv")  # Ensure the file has 'Question' and 'Answer' columns
+except FileNotFoundError:
+    raise FileNotFoundError("Dataset file 'conversational_dataset.csv' not found. Please check the file path.")
+
+if 'Question' not in faq_data.columns or 'Answer' not in faq_data.columns:
+    raise KeyError("The dataset must contain 'Question' and 'Answer' columns.")
+
+
+# Preprocess questions for similarity matching
+vectorizer = TfidfVectorizer()
+faq_vectors = vectorizer.fit_transform(faq_data['Question'])
 
 # Configuration
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -49,10 +65,6 @@ def dashboard():
 def dashboard1():
     return render_template('dashboard.html')
 
-# Route for FAQ page
-@app.route('/faq')
-def faq():
-    return render_template('faq.html')
 
 # Route for Goals page
 @app.route('/goals.html')
@@ -244,6 +256,40 @@ def logout():
     flash('You have been logged out.', 'info')
     return redirect(url_for('login'))
 
+
+# Route for FAQ page
+@app.route('/faq.html')
+def faq():
+    return render_template('faq.html')
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_query = request.json.get('query')
+    if not user_query:
+        return jsonify({"error": "Query is missing"}), 400
+
+    # Vectorize the user's query
+    query_vector = vectorizer.transform([user_query])
+
+    # Compute similarity scores
+    similarities = cosine_similarity(query_vector, faq_vectors)
+
+    # Find the most relevant question
+    max_index = similarities.argmax()
+    max_score = similarities[0, max_index]
+
+    # Define a dynamic threshold based on average similarity
+    threshold = max(0.1, similarities.mean())  # Prevent the threshold from being too low
+
+    if max_score >= threshold:  # Check if similarity score meets the threshold
+        answer = faq_data.iloc[max_index]['Answer']
+    else:
+        answer = (
+            "I'm sorry, I couldn't find an answer to your question. "
+            "Please try rephrasing or ask something else."
+        )
+
+    return jsonify({"answer": answer})
 
 
 # Run the Flask app
