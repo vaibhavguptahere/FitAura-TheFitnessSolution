@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Fitness Progress Tracker </title>
+  <meta content="Fitness Tracker" name="description">
+  <meta content="Fit Aura, Get-Fit" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="static/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="static/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="static/assets/css/style.css" rel="stylesheet">
+
+  
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  
+    <!-- Main CSS File -->
+    <link href="static/assets/css/main.css" rel="stylesheet">
+    <link href="static/assets/css/new.css" rel="stylesheet">
+    <link href="static/assets/css/goals.css" rel="stylesheet">
+      
+</head>
+<body>
+
+  
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center me-auto me-lg-0">
+        <h1 class="sitename">FitAura </h1>
+        <span> &#8734 </span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html" class="active">Home<br></a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>      
+          <li class="dropdown"><a href="#"><span>Features</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="weight.html">Weight Track</a></li>
+              <li class="dropdown"><a href="workout.html"><span>Track Workout</span></a>
+              </li>
+              <li><a href="calorie.html">Calorie Intake</a></li>
+              <li><a href="goals.html">Set your Goals</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="index.html#about">Get Started</a>
+
+    </div>
+  </header>
+ <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="dashboard.html">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="calorie.html">
+          <i class="bi bi-menu-button-wide"></i><span>Calorie Intake</span></i>
+        </a>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="weight.html">
+          <i class="bi bi-journal-text"></i><span>Weight Tracker</span></i>
+        </a>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="workout.html">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Workout</span></i>
+        </a>
+      </li><!-- End Tables Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="goals.html">
+          <i class="bi bi-bar-chart"></i><span>Set Your Goals</span></i>
+        </a>
+      </li><!-- End Charts Nav -->
+
+
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="profile.html">
+          <i class="bi bi-person"></i>
+          <span>Profile</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="faq.html">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+          <li class="breadcrumb-item active">Set Your Goals</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="section dashboard">
+      <div class="row">
+        <div class="container">
+          <h1>Set Your Goals</h1>
+          
+          <div class="goal-section">
+              <h2>Set Your Goals</h2>
+              <form id="goalForm">
+                  <div class="form-group">
+                      <label for="currentWeight">Current Weight (kg):</label>
+                      <input type="number" id="currentWeight" required>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="targetWeight">Target Weight (kg):</label>
+                      <input type="number" id="targetWeight" required>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="timeframe">Timeframe (weeks):</label>
+                      <input type="number" id="timeframe" required>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="activityLevel">Activity Level:</label>
+                      <select id="activityLevel" required>
+                          <option value="sedentary">Sedentary (little or no exercise)</option>
+                          <option value="light">Lightly active (1-3 days/week)</option>
+                          <option value="moderate">Moderately active (3-5 days/week)</option>
+                          <option value="very">Very active (6-7 days/week)</option>
+                          <option value="extra">Extra active (very active + physical job)</option>
+                      </select>
+                  </div>
+                  
+                  <button type="submit">Calculate Plan</button>
+              </form>
+          </div>
+          
+          <div id="results" class="results-section hidden">
+              <h2>Your Fitness Plan</h2>
+              <div class="result-card">
+                  <h3>Weight Loss Goal</h3>
+                  <p>Current Weight: <span id="displayCurrentWeight"></span> kg</p>
+                  <p>Target Weight: <span id="displayTargetWeight"></span> kg</p>
+                  <p>Total to Lose: <span id="displayWeightToLose"></span> kg</p>
+              </div>
+              
+              <div class="result-card">
+                  <h3>Weekly Goals</h3>
+                  <p>Weekly Weight Loss Target: <span id="weeklyTarget"></span> kg</p>
+                  <p>Recommended Exercise: <span id="exerciseRecommendation"></span></p>
+                  <p>Daily Calorie Target: <span id="calorieTarget"></span> calories</p>
+              </div>
+          </div>
+      </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+        <!-- ======= Footer ======= -->
+        <footer id="footer" class="footer">
+          <div class="copyright">
+            <div class="container text-center">
+              <p>© <span>Copyright</span> <strong class="px-1 sitename">FitAura</strong> <span>All Rights Reserved</span></p>
+            </div>
+          </div>
+        </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+  <script src="static/assets/js/goals.js"></script>
+
+</body>
+
+</html>
