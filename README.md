@@ -32,6 +32,8 @@ FitAura offers a personalized, data-driven, and interactive platform that:
 
 ## 🔬 Features
 
+![..](https://i.postimg.cc/ZKZnLBjF/features.png)
+
 ### ✨ Core Functionalities:
 - **Personalized Fitness Dashboard**: Track your daily activities, calories burned, and more. All user-specific details, including fitness goals and history, are presented clearly.
 - **AI-Powered Weight Prediction**: Predict future weight trends based on user data and activity levels, helping users adjust their routines effectively.
@@ -111,16 +113,20 @@ FitAura offers a personalized, data-driven, and interactive platform that:
 ## 📸 Screenshots
 
 ### 🏋️ Dashboard:
-![Dashboard](insert_dashboard_image_url_here)
+![Dashboard](https://i.postimg.cc/TYxW1HD9/fitaura.png)
 
 ### 🎯 Workout Planner:
-![Workout Planner](insert_workout_planner_image_url_here)
+![Workout Planner](https://i.postimg.cc/SQTwNH30/workout-planner.png)
 
-### 🍎 Diet Suggestions:
-![Diet Suggestions](insert_diet_suggestions_image_url_here)
+### 🍎 Weight Prediction:
+![Weight Prediction](https://i.postimg.cc/dV8HdfHV/weight-trend.png)
 
-### 🔬 Analytics:
-![Analytics](insert_analytics_image_url_here)
+### 🔬 Fitness Plan:
+![Analytics](https://i.postimg.cc/qB1d6Nt5/workout-progress.png)
+
+### 🔬 FAQ's Section:
+![Analytics](https://i.postimg.cc/jj0h8j76/faq.png)
+
 
 ---
 
