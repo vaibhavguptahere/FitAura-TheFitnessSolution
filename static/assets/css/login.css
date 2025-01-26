@@ -1,13 +1,14 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #000; /* Black background */
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 .container {
@@ -18,35 +19,55 @@ body {
 }
 
 .form-box {
-    background-color: #fff; /* White column */
+    background: linear-gradient(135deg, #fff, #f4f4f4); /* Gradient white column */
     color: #000;
     width: 350px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.form-box:hover {
+    transform: scale(1.05); /* Subtle zoom on hover */
 }
 
 .form-box h2 {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #333;
 }
 
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
 }
 
 .input-group label {
     display: block;
     font-size: 14px;
     margin-bottom: 5px;
+    color: #555;
 }
 
 .input-group input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #000;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .btn {
@@ -54,27 +75,32 @@ body {
     background-color: #000; /* Black button */
     color: #fff;
     border: none;
-    padding: 10px;
-    border-radius: 4px;
+    padding: 12px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn:hover {
     background-color: #333;
+    transform: translateY(-2px);
 }
 
 .link {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-size: 14px;
 }
 
 .link a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .link a:hover {
+    color: #555;
     text-decoration: underline;
 }
