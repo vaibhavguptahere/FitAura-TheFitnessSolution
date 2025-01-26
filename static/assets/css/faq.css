@@ -51,7 +51,7 @@ body {
   
   #chat-box {
     flex: 1;
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: auto;
     border: 1px solid #e6e6e6;
     border-radius: 6px;
