@@ -1,15 +1,35 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify,  url_for, flash, request, session
 from forms import RegistrationForm, LoginForm
 from models import db, bcrypt, User, init_db
-from flask_login import LoginManager, login_user, logout_user, current_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 import pandas as pd
 import numpy as np
 from sklearn.svm import SVR
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import os
+from sqlalchemy import create_engine, text
+
 
 app = Flask(__name__)
+
+# Configuration
+app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Update with your database
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize extensions
+db.init_app(app)  # Initialize db once here
+bcrypt.init_app(app)
+
+# Initialize LoginManager
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
+# Load user for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 # Home route
 @app.route('/')
@@ -57,6 +77,7 @@ def workout():
 @app.route('/calorie.html')
 def calorie():
     return render_template('calorie.html')
+
 
 # @app.route('/contact')
 # def contact():
@@ -154,7 +175,79 @@ def predict_future(days):
     return jsonify({"predictions": predictions})
 
 
+# Register 
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        print(f"Received data - Username: {username}, Email: {email}")
+
+        # Check if the user already exists
+        existing_user = User.query.filter((User.email == email) | (User.username == username)).first()
+        if existing_user:
+            flash('Email or Username already exists', 'danger')
+            return redirect(url_for('login'))
+
+        # Hash the password and create a new user
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        new_user = User(username=username, email=email, password=hashed_password)
+
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash(f'Account created for {username}!', 'success')
+
+            # Login the user and redirect to dashboard
+            login_user(new_user)
+            session['username'] = new_user.username
+
+            flash(f'Welcome, {new_user.username}! Your account has been created.', 'success')
+            return redirect(url_for('dashboard'))  # Directly redirecting to dashboard
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error creating account: {e}', 'danger')
+            return redirect(url_for('register'))
+
+    return render_template('register.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        user = User.query.filter_by(email=email).first()
+
+        if user and bcrypt.check_password_hash(user.password, password):
+            login_user(user, remember=request.form.get('remember', False))
+            session['username'] = user.username
+            flash(f'Welcome, {user.username}! You are now logged in.', 'success')
+            return redirect(url_for('dashboard'))
+
+        else:
+            flash('Login unsuccessful. Please check email and password.', 'danger')
+
+    return render_template('login.html')
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('login'))
+
+
 
 # Run the Flask app
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
