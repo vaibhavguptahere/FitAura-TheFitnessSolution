@@ -47,6 +47,232 @@
     <!-- Main CSS File -->
     <link href="../static/assets/css/main.css" rel="stylesheet">
     <link href="../static/assets/css/new.css" rel="stylesheet">
+    <style>
+      .dashboard {
+          max-width: 1400px;
+          margin: 0 auto;
+      }
+      
+      header {
+          margin-bottom: 2rem;
+      }
+      
+      h1 {
+          font-size: 2.5rem;
+          color: #1f2937;
+          margin-bottom: 0.5rem;
+      }
+      
+      .subtitle {
+          color: #6b7280;
+          font-size: 1.1rem;
+      }
+      
+      .dashboard-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 1.5rem;
+      }
+      
+      .dashboard-box {
+          background: white;
+          border-radius: 1rem;
+          overflow: hidden;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          transition: all 0.3s ease;
+          cursor: pointer;
+      }
+      
+      .dashboard-box:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      
+      .dashboard-box[data-color="purple"]::before {
+          background: #8b5cf6;
+      }
+      
+      .dashboard-box[data-color="blue"]::before {
+          background: #3b82f6;
+      }
+      
+      .dashboard-box[data-color="green"]::before {
+          background: #10b981;
+      }
+      
+      .dashboard-box[data-color="orange"]::before {
+          background: #f59e0b;
+      }
+      
+      .dashboard-box::before {
+          content: '';
+          display: block;
+          height: 4px;
+          width: 100%;
+      }
+      
+      .box-content {
+          padding: 1.5rem;
+      }
+      
+      .icon-wrapper {
+          width: 48px;
+          height: 48px;
+          background: #f3f4f6;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1rem;
+      }
+      
+      .icon-wrapper svg {
+          width: 24px;
+          height: 24px;
+          color: #4b5563;
+      }
+      
+      .box-details h3 {
+          color: #374151;
+          font-size: 1.25rem;
+          margin-bottom: 0.5rem;
+      }
+      
+      .stats {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+      }
+      
+      .value {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #111827;
+      }
+      
+      .change {
+          font-size: 0.875rem;
+          font-weight: 500;
+          padding: 0.25rem 0.5rem;
+          border-radius: 9999px;
+      }
+      
+      .change.positive {
+          background: #dcfce7;
+          color: #059669;
+      }
+      
+      .expanded-content {
+          margin-top: 1rem;
+          display: none;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+      
+      .expanded-content p {
+          color: #6b7280;
+          line-height: 1.5;
+          margin-bottom: 1rem;
+      }
+      
+      .chart-placeholder {
+          width: 100%;
+          height: 120px;
+          background: #f3f4f6;
+          border-radius: 0.5rem;
+          margin-top: 1rem;
+      }
+      
+      .dashboard-box.expanded {
+          grid-column: span 2;
+          grid-row: span 2;
+          min-height: 500px;
+      }
+      
+      .dashboard-box.expanded .expanded-content {
+          display: block;
+          opacity: 1;
+      }
+      
+      /* New styles for fitness dashboard */
+      .chart-details, .workout-stats {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+          margin-bottom: 1rem;
+      }
+      
+      .detail-item, .stat-item {
+          background: #f9fafb;
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.875rem;
+          color: #4b5563;
+      }
+      
+      .goals-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          margin-bottom: 1rem;
+      }
+      
+      .goal-item {
+          background: #f9fafb;
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.875rem;
+          color: #4b5563;
+      }
+      
+      .goal-item.completed {
+          background: #ecfdf5;
+          color: #059669;
+      }
+      
+      .goal-item span:first-child {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+      }
+      
+      .chart-container {
+          width: 100%;
+          height: 200px;
+          margin-top: 1rem;
+          position: relative;
+      }
+      
+      .chart-container canvas {
+          width: 100% !important;
+          height: 100% !important;
+      }
+      
+      @media (max-width: 768px) {
+          .dashboard-box.expanded {
+              grid-column: span 1;
+              grid-row: span 1;
+          }
+          
+          body {
+              padding: 1rem;
+          }
+          
+          h1 {
+              font-size: 2rem;
+          }
+          
+          .chart-details, .workout-stats {
+              grid-template-columns: 1fr;
+          }
+      }
+      </style>
       
 </head>
 <body>
@@ -157,7 +383,170 @@
 
     <section class="section dashboard">
       <div class="row">
-
+            <div class="dashboard">
+                <header>
+                    <h1>Fitness Journey</h1>
+                    <p class="subtitle">Track your progress and crush your fitness goals!</p>
+                </header>
+        
+                <div class="dashboard-grid">
+                    <div class="dashboard-box" data-color="purple">
+                        <div class="box-content">
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                            </div>
+                            <div class="box-details">
+                                <h3>Calorie Tracker</h3>
+                                <div class="stats">
+                                    <span class="value">1,850</span>
+                                    <span class="change positive">-350 to goal</span>
+                                </div>
+                            </div>
+                            <div class="expanded-content">
+                                <p>Today's calorie breakdown. Target: 2,200 calories</p>
+                                <div class="chart-details">
+                                    <div class="detail-item">
+                                        <span>Breakfast</span>
+                                        <span>450 cal</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Lunch</span>
+                                        <span>650 cal</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Dinner</span>
+                                        <span>550 cal</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Snacks</span>
+                                        <span>200 cal</span>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="calorieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="dashboard-box" data-color="blue">
+                        <div class="box-content">
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.91 8.84 8.56 2.23a1.93 1.93 0 0 0-1.81 0L3.1 4.13a2.12 2.12 0 0 0-.05 3.69l12.22 6.93a2 2 0 0 0 1.94 0L21 12.51a2.12 2.12 0 0 0-.09-3.67Z"></path><path d="m3.09 8.84 12.35-6.61a1.93 1.93 0 0 1 1.81 0l3.65 1.9a2.12 2.12 0 0 1 .1 3.69L8.73 14.75a2 2 0 0 1-1.94 0L3 12.51a2.12 2.12 0 0 1 .09-3.67Z"></path><line x1="12" y1="22" x2="12" y2="13"></line><path d="M20 13.5v3.37a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13.5"></path></svg>
+                            </div>
+                            <div class="box-details">
+                                <h3>Weight Progress</h3>
+                                <div class="stats">
+                                    <span class="value">75.5</span>
+                                    <span class="change positive">-2.3 kg</span>
+                                </div>
+                            </div>
+                            <div class="expanded-content">
+                                <p>Your 30-day weight journey. Keep going strong!</p>
+                                <div class="chart-details">
+                                    <div class="detail-item">
+                                        <span>Starting Weight</span>
+                                        <span>77.8 kg</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Current Weight</span>
+                                        <span>75.5 kg</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Target Weight</span>
+                                        <span>70.0 kg</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span>Weekly Change</span>
+                                        <span>-0.8 kg</span>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="weightChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="dashboard-box" data-color="green">
+                        <div class="box-content">
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"></path><path d="M6 20V10"></path><path d="M18 20V4"></path></svg>
+                            </div>
+                            <div class="box-details">
+                                <h3>Fitness Goals</h3>
+                                <div class="stats">
+                                    <span class="value">4</span>
+                                    <span class="change positive">2 completed</span>
+                                </div>
+                            </div>
+                            <div class="expanded-content">
+                                <p>Your active fitness goals and progress</p>
+                                <div class="goals-list">
+                                    <div class="goal-item completed">
+                                        <span>🏃‍♂ Run 5km under 30 mins</span>
+                                        <span>Done!</span>
+                                    </div>
+                                    <div class="goal-item completed">
+                                        <span>💪 10 Pull-ups in a row</span>
+                                        <span>Done!</span>
+                                    </div>
+                                    <div class="goal-item">
+                                        <span>🏋 Bench Press 80kg</span>
+                                        <span>75kg now</span>
+                                    </div>
+                                    <div class="goal-item">
+                                        <span>⚖ Reach 70kg weight</span>
+                                        <span>5.5kg to go</span>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="goalsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="dashboard-box" data-color="orange">
+                        <div class="box-content">
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11.5V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v1.4"></path><path d="M14 10V8a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path><path d="M10 9.9V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"></path><path d="M6 14v0a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path><path d="M18 11v0a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8 2 2 0 1 1 4 0"></path></svg>
+                            </div>
+                            <div class="box-details">
+                                <h3>Workout Stats</h3>
+                                <div class="stats">
+                                    <span class="value">12.5</span>
+                                    <span class="change positive">hours this week</span>
+                                </div>
+                            </div>
+                            <div class="expanded-content">
+                                <p>Your workout activity this week</p>
+                                <div class="workout-stats">
+                                    <div class="stat-item">
+                                        <span>Cardio</span>
+                                        <span>4.5 hrs</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span>Strength</span>
+                                        <span>5 hrs</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span>Flexibility</span>
+                                        <span>2 hrs</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span>HIIT</span>
+                                        <span>1 hr</span>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="workoutChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
       </div>
     </section>
@@ -185,9 +574,9 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="static/assets/js/main.js"></script>
   <script src="static/assets/js/dashboard.js"></script>
 
 </body>
