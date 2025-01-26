@@ -1,0 +1,104 @@
+{
+    "app_name": "Flask Web App",
+    "env": "production",
+    "flask_config": {
+      "SECRET_KEY": "your_secret_key",
+      "SQLALCHEMY_DATABASE_URI": "sqlite:///site.db",
+      "SQLALCHEMY_TRACK_MODIFICATIONS": false,
+      "DEBUG": false,
+      "SESSION_COOKIE_NAME": "session"
+    },
+    "database": {
+      "uri": "sqlite:///site.db",
+      "track_modifications": false
+    },
+    "routes": [
+      {
+        "path": "/",
+        "view_function": "index",
+        "template": "index.html"
+      },
+      {
+        "path": "/dashboard",
+        "view_function": "dashboard",
+        "template": "dashboard.html"
+      },
+      {
+        "path": "/profile",
+        "view_function": "profile",
+        "template": "profile.html"
+      },
+      {
+        "path": "/workout.html",
+        "view_function": "workout",
+        "template": "workout.html"
+      },
+      {
+        "path": "/calorie.html",
+        "view_function": "calorie",
+        "template": "calorie.html"
+      },
+      {
+        "path": "/faq.html",
+        "view_function": "faq",
+        "template": "faq.html"
+      },
+      {
+        "path": "/register",
+        "view_function": "register",
+        "methods": ["GET", "POST"]
+      },
+      {
+        "path": "/login",
+        "view_function": "login",
+        "methods": ["GET", "POST"]
+      },
+      {
+        "path": "/logout",
+        "view_function": "logout",
+        "methods": ["GET"]
+      },
+      {
+        "path": "/add_entry",
+        "view_function": "add_entry",
+        "methods": ["POST"]
+      },
+      {
+        "path": "/delete_entry",
+        "view_function": "delete_entry",
+        "methods": ["POST"]
+      },
+      {
+        "path": "/generate_graph",
+        "view_function": "generate_graph",
+        "methods": ["GET"]
+      },
+      {
+        "path": "/predict_future/<int:days>",
+        "view_function": "predict_future",
+        "methods": ["GET"]
+      }
+    ],
+    "login_manager": {
+      "login_view": "login",
+      "user_loader": "load_user"
+    },
+    "extensions": [
+      {
+        "name": "Flask_SQLAlchemy",
+        "init": "db.init_app(app)"
+      },
+      {
+        "name": "Flask_Bcrypt",
+        "init": "bcrypt.init_app(app)"
+      },
+      {
+        "name": "Flask_Login",
+        "init": "login_manager.init_app(app)"
+      }
+    ],
+    "static_files": {
+      "path": "static/weight_trend.png"
+    }
+  }
+  
