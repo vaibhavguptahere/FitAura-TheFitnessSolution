@@ -1,6 +1,6 @@
 # FitAura - LNMIIT Hacks Hackathon Project 🏅📊
 
-![FitAura]()
+![FitAura](https://i.postimg.cc/J4j0N4RC/1.png)
 
 Welcome to **FitAura**, an innovative fitness and health tracking solution developed for the LNMIIT Hacks Hackathon! Our project is designed to empower users with the tools they need to maintain a healthy lifestyle. Built using **Flask**, **HTML**, **CSS**, and **JavaScript**, and powered by a robust **SQL database**, FitAura combines technology and user-centric design to deliver an intuitive and impactful fitness experience.
 
