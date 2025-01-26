@@ -31,7 +31,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 9px;
   }
   
   .predefined-questions button {
@@ -55,7 +55,7 @@ body {
     overflow-y: auto;
     border: 1px solid #e6e6e6;
     border-radius: 6px;
-    padding: 10px;
+    padding: 0px;
     background: #f8f8f8;
   }
   

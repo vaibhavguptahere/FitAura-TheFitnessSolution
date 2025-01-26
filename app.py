@@ -291,6 +291,84 @@ def chat():
 
     return jsonify({"answer": answer})
 
+# Goals 
+
+
+# AI Model to estimate calorie needs, weight loss, and more personalized recommendations
+def ai_model(data):
+    # Activity multiplier based on the user's activity level
+    activity_multiplier = {
+        "sedentary": 1.2,
+        "light": 1.375,
+        "moderate": 1.55,
+        "very": 1.725,
+        "extra": 1.9
+    }
+
+    # Activity factor based on the selected activity level
+    activity_factor = activity_multiplier.get(data['activityLevel'], 1.2)
+    
+    # BMR Calculation (for example purposes)
+    bmr = 10 * data['currentWeight'] + 6.25 * 170 - 5 * 30 + 5  # Basic BMR formula for male
+    calorie_target = bmr * activity_factor
+
+    # Calculate the weight to lose and weekly target
+    weight_to_lose = data['currentWeight'] - data['targetWeight']
+    weekly_target = weight_to_lose / data['timeframe']
+
+    # Personalized exercise recommendation based on the nutrition goals
+    if data['nutritionGoals'] == "cut":
+        exercise_recommendation = "Cardio (running, cycling) for 4-5 times/week, plus HIIT."
+        macronutrients = {"protein": "30%", "carbs": "40%", "fat": "30%"}
+    elif data['nutritionGoals'] == "bulk":
+        exercise_recommendation = "Strength training (weight lifting) for 5 days/week."
+        macronutrients = {"protein": "40%", "carbs": "30%", "fat": "30%"}
+    elif data['nutritionGoals'] == "maintain":
+        exercise_recommendation = "Balanced workout routine (3-4 times/week, mixing cardio and strength)."
+        macronutrients = {"protein": "25%", "carbs": "45%", "fat": "30%"}
+
+    # Workout plan suggestions based on nutrition goal
+    workout_plan = {
+        "cut": ["5k run", "HIIT Circuit", "Cycling for 45 minutes"],
+        "bulk": ["Deadlifts", "Bench Press", "Squats", "Shoulder Press"],
+        "maintain": ["Jump Rope", "Push-Ups", "Bodyweight Squats", "Planks"]
+    }
+
+    # Estimate the time to reach the target weight in weeks
+    time_estimation = round(weight_to_lose / weekly_target, 2)
+
+    # Suggested nutrition adjustments based on the user's goal
+    nutrition_adjustments = f"Focus on a diet with {macronutrients['protein']} protein, {macronutrients['carbs']} carbs, and {macronutrients['fat']} fat."
+
+    # Returning a detailed response with calorie target, workout plan, and other personalized insights
+    return {
+        "currentWeight": data['currentWeight'],
+        "targetWeight": data['targetWeight'],
+        "weightToLose": weight_to_lose,
+        "weeklyTarget": round(weekly_target, 2),
+        "exerciseRecommendation": exercise_recommendation,
+        "calorieTarget": round(calorie_target, 2),
+        "aiExercisePlan": workout_plan.get(data['nutritionGoals'], []),
+        "aiTimeEstimation": f"{time_estimation} weeks",
+        "aiNutritionAdjustments": nutrition_adjustments,
+        "macronutrients": macronutrients,
+    }
+
+# Route to generate the fitness plan based on input
+@app.route('/generate_plan', methods=['POST'])
+def generate_plan():
+    # Getting form data from the frontend
+    data = {
+        "currentWeight": float(request.form['currentWeight']),
+        "targetWeight": float(request.form['targetWeight']),
+        "timeframe": int(request.form['timeframe']),
+        "activityLevel": request.form['activityLevel'],
+        "nutritionGoals": request.form['nutritionGoals']
+    }
+
+    # Get AI-based recommendations
+    result = ai_model(data)
+    return jsonify(result)
 
 # Run the Flask app
 if __name__ == '__main__':

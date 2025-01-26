@@ -3,44 +3,50 @@
     margin: 2rem auto;
     padding: 0 1rem;
 
-    h1 {
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+  
+      h1 {
         text-align: center;
         color: #2c3e50;
         margin-bottom: 2rem;
-    }
-    
-    h2 {
+      }
+  
+      h2 {
         color: #2c3e50;
         margin-bottom: 1.5rem;
-    }
-    
-    .goal-section {
+      }
+  
+      .goal-section {
         background: white;
         padding: 2rem;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         margin-bottom: 2rem;
-    }
-    
-    .form-group {
+      }
+  
+      .form-group {
         margin-bottom: 1.5rem;
-    }
-    
-    label {
+      }
+  
+      label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: bold;
-    }
-    
-    input, select {
+      }
+  
+      input[type="number"], select {
         width: 100%;
         padding: 0.8rem;
         border: 1px solid #ddd;
         border-radius: 4px;
         font-size: 1rem;
-    }
-    
-    button {
+      }
+  
+      button[type="submit"] {
         background-color: #3498db;
         color: white;
         padding: 1rem 2rem;
@@ -50,42 +56,90 @@
         width: 100%;
         font-size: 1rem;
         font-weight: bold;
-    }
-    
-    button:hover {
+      }
+  
+      button[type="submit"]:hover {
         background-color: #2980b9;
-    }
-    
-    .results-section {
+      }
+  
+      .results-section {
         background: white;
         padding: 2rem;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    .hidden {
-        display: none;
-    }
-    
-    .result-card {
+      }
+  
+      .result-card {
         background: #f8f9fa;
         padding: 1.5rem;
         border-radius: 6px;
         margin-bottom: 1rem;
-    }
-    
-    .result-card h3 {
+      }
+  
+      .result-card h3 {
         color: #2c3e50;
         margin-bottom: 1rem;
-    }
-    
-    .result-card p {
+      }
+  
+      .result-card p {
         margin-bottom: 0.5rem;
-    }
-    
-    span {
+      }
+  
+      span {
         font-weight: bold;
         color: #3498db;
-    }
+      }
+  
+      .ai-insights {
+        background-color: #e9f7ef;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+  
+      .ai-insights h3 {
+        color: #27ae60;
+        margin-bottom: 15px;
+      }
+  
+      .ai-insights ul {
+        list-style-type: none;
+        padding: 0;
+      }
+  
+      .ai-insights li {
+        margin: 10px 0;
+        font-size: 1.1em;
+      }
+  
+      .ai-insights strong {
+        color: #333;
+      }
+  
+      @media (max-width: 768px) {
+        .container {
+          width: 90%;
+        }
+  
+        h1 {
+          font-size: 1.6em;
+        }
+  
+        h2 {
+          font-size: 1.6em;
+        }
+  
+        button[type="submit"] {
+          font-size: 1em;
+        }
+  
+        .result-card {
+          padding: 15px;
+        }
+  
+        .ai-insights {
+          padding: 15px;
+        }
+      }
 }
 

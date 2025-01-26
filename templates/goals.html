@@ -49,7 +49,10 @@
     <link href="static/assets/css/main.css" rel="stylesheet">
     <link href="static/assets/css/new.css" rel="stylesheet">
     <link href="static/assets/css/goals.css" rel="stylesheet">
-      
+    <style>
+        
+
+    </style>
 </head>
 <body>
 
@@ -159,60 +162,119 @@
     </div>
 
     <section class="section dashboard">
-      <div class="row">
-        <div class="container">
-          <h1>Set Your Goals</h1>
-          
-          <div class="goal-section">
+
+        </head>
+        <body>
+        
+        <section class="section dashboard">
+          <div class="container">
+            <h1>Set Your Fitness Goals</h1>
+        
+            <div class="goal-section">
               <h2>Set Your Goals</h2>
-              <form id="goalForm">
-                  <div class="form-group">
-                      <label for="currentWeight">Current Weight (kg):</label>
-                      <input type="number" id="currentWeight" required>
-                  </div>
-                  
-                  <div class="form-group">
-                      <label for="targetWeight">Target Weight (kg):</label>
-                      <input type="number" id="targetWeight" required>
-                  </div>
-                  
-                  <div class="form-group">
-                      <label for="timeframe">Timeframe (weeks):</label>
-                      <input type="number" id="timeframe" required>
-                  </div>
-                  
-                  <div class="form-group">
-                      <label for="activityLevel">Activity Level:</label>
-                      <select id="activityLevel" required>
-                          <option value="sedentary">Sedentary (little or no exercise)</option>
-                          <option value="light">Lightly active (1-3 days/week)</option>
-                          <option value="moderate">Moderately active (3-5 days/week)</option>
-                          <option value="very">Very active (6-7 days/week)</option>
-                          <option value="extra">Extra active (very active + physical job)</option>
-                      </select>
-                  </div>
-                  
-                  <button type="submit">Calculate Plan</button>
+              <form id="goalForm" method="POST">
+                <div class="form-group">
+                  <label for="currentWeight">Current Weight (kg):</label>
+                  <input type="number" id="currentWeight" name="currentWeight" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="targetWeight">Target Weight (kg):</label>
+                  <input type="number" id="targetWeight" name="targetWeight" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="timeframe">Timeframe (weeks):</label>
+                  <input type="number" id="timeframe" name="timeframe" required>
+                </div>
+        
+                <div class="form-group">
+                  <label for="activityLevel">Activity Level:</label>
+                  <select id="activityLevel" name="activityLevel" required>
+                    <option value="sedentary">Sedentary (little or no exercise)</option>
+                    <option value="light">Lightly active (1-3 days/week)</option>
+                    <option value="moderate">Moderately active (3-5 days/week)</option>
+                    <option value="very">Very active (6-7 days/week)</option>
+                    <option value="extra">Extra active (very active + physical job)</option>
+                  </select>
+                </div>
+        
+                <div class="form-group">
+                  <label for="nutritionGoals">Nutrition Goals:</label>
+                  <select id="nutritionGoals" name="nutritionGoals" required>
+                    <option value="maintain">Maintain weight</option>
+                    <option value="cut">Cut (fat loss)</option>
+                    <option value="bulk">Bulk (muscle gain)</option>
+                  </select>
+                </div>
+        
+                <button type="submit" id="submitBtn">Generate Plan with AI Insights</button>
               </form>
-          </div>
-          
-          <div id="results" class="results-section hidden">
+            </div>
+        
+            <div id="results" class="results-section hidden">
               <h2>Your Fitness Plan</h2>
+        
               <div class="result-card">
-                  <h3>Weight Loss Goal</h3>
-                  <p>Current Weight: <span id="displayCurrentWeight"></span> kg</p>
-                  <p>Target Weight: <span id="displayTargetWeight"></span> kg</p>
-                  <p>Total to Lose: <span id="displayWeightToLose"></span> kg</p>
+                <h3>Weight Loss Goal</h3>
+                <p>Current Weight: <span id="displayCurrentWeight"></span> kg</p>
+                <p>Target Weight: <span id="displayTargetWeight"></span> kg</p>
+                <p>Total to Lose: <span id="displayWeightToLose"></span> kg</p>
               </div>
-              
+        
               <div class="result-card">
-                  <h3>Weekly Goals</h3>
-                  <p>Weekly Weight Loss Target: <span id="weeklyTarget"></span> kg</p>
-                  <p>Recommended Exercise: <span id="exerciseRecommendation"></span></p>
-                  <p>Daily Calorie Target: <span id="calorieTarget"></span> calories</p>
+                <h3>Weekly Goals</h3>
+                <p>Weekly Weight Loss Target: <span id="weeklyTarget"></span> kg</p>
+                <p>Recommended Exercise: <span id="exerciseRecommendation"></span></p>
+                <p>Daily Calorie Target: <span id="calorieTarget"></span> calories</p>
               </div>
+        
+              <div class="ai-insights">
+                <h3>AI Recommendations</h3>
+                <p>Based on your inputs, here are your personalized fitness insights:</p>
+                <ul>
+                  <li><strong>Personalized Exercise Routine:</strong> <span id="aiExercisePlan"></span></li>
+                  <li><strong>Estimated Weight Loss Time:</strong> <span id="aiTimeEstimation"></span></li>
+                  <li><strong>Suggested Nutritional Adjustments:</strong> <span id="aiNutritionAdjustments"></span></li>
+                </ul>
+              </div>
+            </div>
           </div>
-      </div>
+        </section>
+        
+        <script>
+          document.getElementById('goalForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent page refresh
+        
+            const formData = new FormData(this);
+            fetch('/generate_plan', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              // Display results from AI backend
+              document.getElementById('displayCurrentWeight').textContent = data.currentWeight;
+              document.getElementById('displayTargetWeight').textContent = data.targetWeight;
+              document.getElementById('displayWeightToLose').textContent = data.weightToLose;
+              document.getElementById('weeklyTarget').textContent = data.weeklyTarget;
+              document.getElementById('exerciseRecommendation').textContent = data.exerciseRecommendation;
+              document.getElementById('calorieTarget').textContent = data.calorieTarget;
+              document.getElementById('aiExercisePlan').textContent = data.aiExercisePlan;
+              document.getElementById('aiTimeEstimation').textContent = data.aiTimeEstimation;
+              document.getElementById('aiNutritionAdjustments').textContent = data.aiNutritionAdjustments;
+        
+              // Show results
+              document.getElementById('results').classList.remove('hidden');
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+          });
+        </script>
+        
+        </body>
+        </html>
 
       </div>
     </section>
