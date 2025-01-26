@@ -1,162 +1,113 @@
-.container {
-    margin-top: 0px;
-    max-width: 800px;
-    width: 80%;
-    padding: 2rem;
-    position: relative;
-
-    h1 {
-        text-align: center;
-        margin-bottom: 3rem;
-        font-size: 2.5rem;
-        color: #00ff88;
-        text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-        animation: glow 2s ease-in-out infinite alternate;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #333;
+  }
+  
+  
+  #chat-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+  }
+  
+  #chat-container h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #2f2f30;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .predefined-questions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .predefined-questions button {
+    background: #0078d4;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+  }
+  
+  .predefined-questions button:hover {
+    background: #005bb5;
+  }
+  
+  #chat-box {
+    flex: 1;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    padding: 10px;
+    background: #f8f8f8;
+  }
+  
+  .message {
+    margin: 10px 0;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    max-width: 75%;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .user-message {
+    background: #0078d4;
+    color: #fff;
+    text-align: right;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 120, 212, 0.2);
+  }
+  
+  .bot-message {
+    background: #e6e6e6;
+    color: #333;
+    text-align: left;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #chat-box {
+    flex: 1;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    padding: 15px;
+    background: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
     }
-    
-    @keyframes glow {
-        from {
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-        }
-        to {
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
-        }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-    
-    .search-box {
-        position: relative;
-        margin-bottom: 2rem;
-    }
-    
-    .search-box input {
-        width: 100%;
-        padding: 1rem 3rem 1rem 1.5rem;
-        border: none;
-        border-radius: 25px;
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-    
-    .search-box input:focus {
-        outline: none;
-        background: rgba(255, 255, 255, 0.15);
-        box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-    }
-    
-    .search-box .search-icon {
-        position: absolute;
-        right: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.2rem;
-        opacity: 0.7;
-    }
-    
-    .faq-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .faq-item {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        border-left: 4px solid transparent;
-    }
-    
-    .faq-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
-        border-left-color: #00ff88;
-    }
-    
-    .faq-question {
-        padding: 1.5rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .faq-question h3 {
-        font-size: 1.1rem;
-        color: #fff;
-        transition: color 0.3s ease;
-    }
-    
-    .faq-item:hover .faq-question h3 {
-        color: #00ff88;
-    }
-    
-    .toggle {
-        font-size: 1.5rem;
-        color: #00ff88;
-        transition: transform 0.3s ease;
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 255, 136, 0.1);
-        border-radius: 50%;
-    }
-    
-    .faq-answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .faq-answer p {
-        padding: 1.5rem;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.8);
-    }
-    
-    .faq-item.active {
-        background: rgba(255, 255, 255, 0.15);
-    }
-    
-    .faq-item.active .toggle {
-        transform: rotate(45deg);
-        background: rgba(0, 255, 136, 0.2);
-    }
-    
-    .faq-item.active .faq-answer {
-        max-height: 1000px;
-    }
-    
-    .faq-item.hidden {
-        display: none;
-    }
-    
-    @media (max-width: 768px) {
-        .container {
-            padding: 1rem;
-        }
-    
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-    
-        .faq-question h3 {
-            font-size: 1rem;
-        }
-    
-        .faq-answer p {
-            padding: 1rem;
-            font-size: 0.9rem;
-        }
-    
-        .search-box input {
-            padding: 0.8rem 2.5rem 0.8rem 1rem;
-            font-size: 0.9rem;
-        }
-    }
-}
+  }
+  
