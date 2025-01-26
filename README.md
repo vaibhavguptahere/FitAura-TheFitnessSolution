@@ -75,28 +75,28 @@ FitAura offers a personalized, data-driven, and interactive platform that:
 - **Contributions**: 
   - Designed and implemented the backend using Flask.
   - Developed the UI/UX using HTML, CSS, and JavaScript.
-- [GitHub]() | [LinkedIn](https://www.linkedin.com/in/vaibhavguptahere-/)
+- [GitHub](https://github.com/vaibhavguptahere) | [LinkedIn](https://www.linkedin.com/in/vaibhavguptahere-/)
 
 ### **2. [Giriraj Mantri] 🎨**
 - **Role**: BackEnd Developer
 - **Contributions**: 
   - Built JS code for the working of the FitAura.
   - Ensured responsive design and seamless user experience.
-- [GitHub]() | [LinkedIn](https://www.linkedin.com/in/giriraj-mantri-25a57b217/)
+- [GitHub](https://github.com/GirirajMantri) | [LinkedIn](https://www.linkedin.com/in/giriraj-mantri-25a57b217/)
 
 ### **3. [Isha Katiyar] 🔜**
 - **Role**: Database Manager
 - **Contributions**: 
   - Designed and managed the SQL database structure.
   - Ensured efficient data retrieval and storage processes.
-- [GitHub]() | [LinkedIn](https://www.linkedin.com/in/nishika-kansal-870b18322/)
+- [GitHub](https://github.com/isha-1686) | [LinkedIn](https://www.linkedin.com/in/nishika-kansal-870b18322/)
 
 ### **4. [Nishika Kansal] 🔧**
 - **Role**: UI/UX Designer
 - **Contributions**: 
   - Designed and implemented the backend using Flask.
   - Worked closely with the frontend team to ensure design consistency.
-- [GitHub]() | [LinkedIn](https://www.linkedin.com/in/isha-katiyar-432156326/)
+- [GitHub](https://github.com/Nishikakansal) | [LinkedIn](https://www.linkedin.com/in/isha-katiyar-432156326/)
 
 ---
 
